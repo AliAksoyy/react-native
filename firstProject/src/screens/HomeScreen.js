@@ -13,6 +13,14 @@ const HomeScreen = ({ navigation }) => {
         title="KursBilgilerim"
         onPress={() => navigation.navigate("KursBilgilerim")}
       />
+      <Button
+        title="Sayaç Uygulaması"
+        onPress={() => navigation.navigate("Sayaç")}
+      />
+      <Button
+        title="Kutu Uygulaması"
+        onPress={() => navigation.navigate("Kutu")}
+      />
     </View>
   );
 };
