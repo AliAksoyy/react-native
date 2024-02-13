@@ -29,6 +29,10 @@ const HomeScreen = ({ navigation }) => {
         title="Renk Degistir"
         onPress={() => navigation.navigate("Renk Degistir")}
       />
+      <Button
+        title="Sifre Ekranı"
+        onPress={() => navigation.navigate("Sifre Ekranı")}
+      />
     </View>
   );
 };
