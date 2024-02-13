@@ -5,28 +5,23 @@ export default function App() {
   return (
     <>
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
-      <View style={styles.containers}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
+        <Text style={styles.title}>React Native</Text>
+        <Text style={styles.content}>React JS</Text>
       </View>
     </>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
-    backgroundColor: "#0f0",
+    flex: 1,
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
-  containers: {
-    flex: 5,
-    backgroundColor: "#00f",
-    alignItems: "center",
-    justifyContent: "center",
+  title: {
+    fontSize: 50,
+  },
+  content: {
+    fontSize: 20,
   },
 });
