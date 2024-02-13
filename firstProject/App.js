@@ -19,7 +19,7 @@ export default function App() {
           component={CoursesInformationScreen}
         />
         <Stack.Screen name="Sayaç" component={CounterScreen} />
-        <Stack.Screen name="Kutu" component={BoxScreen} />
+        <Stack.Screen name="Kutu Uygulaması" component={BoxScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
