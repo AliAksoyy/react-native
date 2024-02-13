@@ -6,6 +6,7 @@ import CoursesInformationScreen from "./src/screens/CoursesInformationScreen";
 import CounterScreen from "./src/screens/CounterScreen";
 import BoxScreen from "./src/screens/BoxScreen";
 import BoxScreenReducerScreen from "./src/screens/BoxScreenReducerScreen";
+import ColorChangeScreen from "./src/screens/ColorChangeScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ export default function App() {
           name="Kutu Reducer Uygulaması"
           component={BoxScreenReducerScreen}
         />
+        <Stack.Screen name="Renk Degistir" component={ColorChangeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
