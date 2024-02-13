@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Information from "../../components/Information";
 
-const CoursesInformation = () => {
+const CoursesInformationScreen = () => {
   return (
     <ScrollView>
       <Information
@@ -24,6 +24,6 @@ const CoursesInformation = () => {
   );
 };
 
-export default CoursesInformation;
+export default CoursesInformationScreen;
 
 const styles = StyleSheet.create({});
