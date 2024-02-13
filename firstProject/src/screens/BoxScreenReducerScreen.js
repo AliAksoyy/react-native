@@ -29,6 +29,7 @@ export default function BoxScreenReducerScreen() {
       />
       <FlatList
         data={state.box}
+        showsVerticalScrollIndicator={false}
         keyExtractor={({ item }) => item}
         renderItem={({ item }) => {
           return (
