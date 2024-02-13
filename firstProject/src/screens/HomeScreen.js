@@ -21,6 +21,10 @@ const HomeScreen = ({ navigation }) => {
         title="Kutu Uygulaması"
         onPress={() => navigation.navigate("Kutu Uygulaması")}
       />
+      <Button
+        title="Kutu Reducer Uygulaması"
+        onPress={() => navigation.navigate("Kutu Reducer Uygulaması")}
+      />
     </View>
   );
 };
