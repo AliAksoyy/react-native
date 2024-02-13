@@ -9,6 +9,10 @@ const HomeScreen = ({ navigation }) => {
         title="Kurslarım"
         onPress={() => navigation.navigate("Kurslarım")}
       />
+      <Button
+        title="KursBilgilerim"
+        onPress={() => navigation.navigate("KursBilgilerim")}
+      />
     </View>
   );
 };
