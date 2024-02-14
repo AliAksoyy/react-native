@@ -37,6 +37,10 @@ const HomeScreen = ({ navigation }) => {
         title="Design Ekranı"
         onPress={() => navigation.navigate("Design Ekranı")}
       />
+      <Button
+        title="Absolute Egzersiz"
+        onPress={() => navigation.navigate("Absolute")}
+      />
     </View>
   );
 };
