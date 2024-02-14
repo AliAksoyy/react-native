@@ -33,6 +33,10 @@ const HomeScreen = ({ navigation }) => {
         title="Sifre Ekranı"
         onPress={() => navigation.navigate("Sifre Ekranı")}
       />
+      <Button
+        title="Design Ekranı"
+        onPress={() => navigation.navigate("Design Ekranı")}
+      />
     </View>
   );
 };

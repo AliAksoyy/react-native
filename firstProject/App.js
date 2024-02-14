@@ -8,6 +8,7 @@ import BoxScreen from "./src/screens/BoxScreen";
 import BoxScreenReducerScreen from "./src/screens/BoxScreenReducerScreen";
 import ColorChangeScreen from "./src/screens/ColorChangeScreen";
 import PasswordScreen from "./src/screens/PasswordScreen";
+import DesignScreen from "./src/screens/DesignScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ export default function App() {
         />
         <Stack.Screen name="Renk Degistir" component={ColorChangeScreen} />
         <Stack.Screen name="Sifre Ekranı" component={PasswordScreen} />
+        <Stack.Screen name="Design Ekranı" component={DesignScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
