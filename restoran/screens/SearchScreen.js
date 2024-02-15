@@ -5,7 +5,7 @@ import useresults from "../hooks/useresults";
 
 export default function SearchScreen() {
   const [searchApi, results] = useresults();
-  console.log(results);
+
   return (
     <View>
       <SearchBar />
