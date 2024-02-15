@@ -3,9 +3,6 @@ import React, { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function SearchBar() {
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState("");
-
   return (
     <View style={styles.backgroundStyle}>
       <AntDesign
