@@ -12,7 +12,7 @@ export default () => {
         location: "İstanbul",
       },
     });
-    setResults(res.data);
+    setResults(res.data.businesses);
   };
   useEffect(() => {
     searchApi("Toast");
