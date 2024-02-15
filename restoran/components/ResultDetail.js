@@ -17,7 +17,12 @@ export default function ResultDetail({ result }) {
 }
 
 const styles = StyleSheet.create({
-  container: { marginLeft: 15 },
-  image: { width: 250, height: 120, borderRadius: 8, marginBottom: 5 },
+  container: { marginHorizontal: 15 },
+  image: {
+    width: 250,
+    height: 120,
+    borderRadius: 8,
+    marginBottom: 5,
+  },
   name: { fontWeight: "bold" },
 });
