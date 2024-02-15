@@ -9,11 +9,12 @@ import React from "react";
 import ResultDetail from "./ResultDetail";
 
 export default function ResultsList({ title, results }) {
-  console.log(results);
   return (
-    <View>
-      <Text>{title}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
       <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
         data={results}
         renderItem={({ item }) => {
           return (
@@ -27,4 +28,7 @@ export default function ResultsList({ title, results }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: { marginBottom: 10 },
+  title: { fontSize: 18, fontWeight: "bold", marginLeft: 15, marginBottom: 5 },
+});
