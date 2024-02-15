@@ -22,23 +22,28 @@ export default function SearchScreen() {
         onTermChange={setTerm}
         onTermSubmit={() => searchApi(term)}
       />
-      {errorMessage ? <Text>{errorMessage}</Text> : null}
-      {results.length === 0 ? (
-        <></>
+      {errorMessage ? (
+        <Text>{errorMessage}</Text>
       ) : (
         <>
-          <ResultsList
-            title="Ucuz Restoranlar"
-            results={filterResultsByPrice("₺")}
-          />
-          <ResultsList
-            title="Uygun Restoranlar"
-            results={filterResultsByPrice("₺₺")}
-          />
-          <ResultsList
-            title="Pahalı Restoranlar"
-            results={filterResultsByPrice("₺₺₺")}
-          />
+          {results.length === 0 ? (
+            <></>
+          ) : (
+            <>
+              <ResultsList
+                title="Ucuz Restoranlar"
+                results={filterResultsByPrice("₺")}
+              />
+              <ResultsList
+                title="Uygun Restoranlar"
+                results={filterResultsByPrice("₺₺")}
+              />
+              <ResultsList
+                title="Pahalı Restoranlar"
+                results={filterResultsByPrice("₺₺₺")}
+              />
+            </>
+          )}
         </>
       )}
     </View>
