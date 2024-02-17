@@ -32,9 +32,30 @@ export default function CourseInput({ visible }) {
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {},
-  image: {},
-  textInput: {},
-  buttonContainer: {},
-  button: {},
+  inputContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 15,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    borderRadius: 20,
+    margin: 20,
+  },
+  textInput: {
+    borderWidth: 1,
+    width: "100%",
+    padding: 10,
+    borderRadius: 10,
+    borderColor: "pink",
+    backgroundColor: "pink",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  button: {
+    width: 100,
+  },
 });
