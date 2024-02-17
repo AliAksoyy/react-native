@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import { AntDesign } from "@expo/vector-icons";
 import NewBlogScreen from "./screens/NewBlogScreen";
 import React, { useState } from "react";
+import DetailScreen from "./screens/DetailScreen";
 
 export default function App() {
   const [blogs, setBlogs] = useState([
@@ -41,6 +42,9 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="NewBlog">
           {(props) => <NewBlogScreen {...props} setBlogs={setBlogs} />}
+        </Stack.Screen>
+        <Stack.Screen name="Content">
+          {(props) => <DetailScreen {...props} setBlogs={setBlogs} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

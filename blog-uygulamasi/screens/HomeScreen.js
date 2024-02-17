@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function HomeScreen({ blogs }) {
+export default function HomeScreen({ navigation, blogs }) {
   return (
     <View style={styles.container}>
       <FlatList
@@ -19,6 +19,7 @@ export default function HomeScreen({ blogs }) {
                 style={{
                   flex: 1,
                 }}
+                onPress={() => navigation.navigate("Content", item)}
               >
                 <View>
                   <Text style={styles.text}>{item.blogHead}</Text>

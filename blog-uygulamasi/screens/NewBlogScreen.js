@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 export default function NewBlogScreen({ navigation, setBlogs }) {
-  console.log(navigation);
   const [blogHead, setBlogHead] = useState("");
   const [blogContent, setBlogContent] = useState("");
 
