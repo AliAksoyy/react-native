@@ -14,18 +14,24 @@ export default function HomeScreen({ blogs }) {
         data={blogs}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity>
-              <View style={styles.flatListContainer}>
+            <View style={styles.flatListContainer}>
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                }}
+              >
                 <View>
                   <Text style={styles.text}>{item.blogHead}</Text>
                 </View>
-                <View>
+              </TouchableOpacity>
+              <View>
+                <TouchableOpacity>
                   <View>
                     <AntDesign name="delete" size={24} color="black" />
                   </View>
-                </View>
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            </View>
           );
         }}
       />
