@@ -17,8 +17,6 @@ export default function App() {
   ]);
   const Stack = createNativeStackNavigator();
 
-  console.log(blogs);
-
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -38,7 +36,7 @@ export default function App() {
           },
         })}
       >
-        <Stack.Screen name="AnaSyafa">
+        <Stack.Screen name="AnaSayfa">
           {(props) => <HomeScreen {...props} blogs={blogs} />}
         </Stack.Screen>
         <Stack.Screen name="NewBlog">

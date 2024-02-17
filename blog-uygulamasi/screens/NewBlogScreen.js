@@ -1,15 +1,18 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 export default function NewBlogScreen({ navigation, setBlogs }) {
+  console.log(navigation);
   const [blogHead, setBlogHead] = useState("");
   const [blogContent, setBlogContent] = useState("");
 
   const addBlog = () => {
-    navigation.navigate("NewBlog");
+    navigation.navigate("AnaSayfa");
     setBlogs((blog) => [
       ...blog,
       { blogHead, blogContent, isEdit: false, id: Date.now() },
     ]);
+    setBlogContent("");
+    setBlogHead("");
   };
 
   return (
