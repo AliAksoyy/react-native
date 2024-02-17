@@ -19,11 +19,11 @@ export default function CourseInput({ visible }) {
         />
         <TextInput style={styles.textInput} placeholder="Yeni Kurs Ekle" />
         <View style={styles.buttonContainer}>
-          <View>
-            <Button style={styles.button} title="iptal ekle" color="red" />
+          <View style={styles.button}>
+            <Button title="iptal ekle" color="red" />
           </View>
-          <View>
-            <Button style={styles.button} title="Ekle" color="blue" />
+          <View style={styles.button}>
+            <Button title="Ekle" color="blue" />
           </View>
         </View>
       </View>
@@ -54,8 +54,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+    marginTop: 10,
   },
   button: {
+    marginHorizontal: 10,
     width: 100,
   },
 });
