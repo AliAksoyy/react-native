@@ -1,12 +1,23 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import { AntDesign } from "@expo/vector-icons";
 import NewBlogScreen from "./screens/NewBlogScreen";
+import React, { useState } from "react";
 
 export default function App() {
+  const [blogs, setBlogs] = useState([
+    {
+      blogHead: "React Native",
+      blogContent: "React Native",
+      id: Date.now().toString(),
+      isEdit: false,
+    },
+  ]);
   const Stack = createNativeStackNavigator();
+
+  console.log(blogs);
 
   return (
     <NavigationContainer>
@@ -27,20 +38,13 @@ export default function App() {
           },
         })}
       >
-        <Stack.Group screenOptions={({ navigation }) => ({})}>
-          <Stack.Screen name="AnaSyafa" component={HomeScreen} />
-          <Stack.Screen name="NewBlog" component={NewBlogScreen} />
-        </Stack.Group>
+        <Stack.Screen name="AnaSyafa">
+          {(props) => <HomeScreen {...props} blogs={blogs} />}
+        </Stack.Screen>
+        <Stack.Screen name="NewBlog">
+          {(props) => <NewBlogScreen {...props} setBlogs={setBlogs} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -1,9 +1,16 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
-export default function NewBlogScreen({ addBlog }) {
-  console.log(addBlog);
+export default function NewBlogScreen({ navigation, setBlogs }) {
   const [blogHead, setBlogHead] = useState("");
   const [blogContent, setBlogContent] = useState("");
+
+  const addBlog = () => {
+    navigation.navigate("NewBlog");
+    setBlogs((blog) => [
+      ...blog,
+      { blogHead, blogContent, isEdit: false, id: Date.now() },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -24,18 +31,7 @@ export default function NewBlogScreen({ addBlog }) {
         />
       </View>
       <View style={styles.button}>
-        <Button
-          title="Kaydet"
-          color="green"
-          onPress={() =>
-            addBlog({
-              blogHead,
-              blogContent,
-              isEdit: false,
-              id: Date.now(),
-            })
-          }
-        />
+        <Button title="Kaydet" color="green" onPress={() => addBlog()} />
       </View>
     </View>
   );

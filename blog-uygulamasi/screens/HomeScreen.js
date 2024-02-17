@@ -5,15 +5,9 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function HomeScreen() {
-  const [blogs, setBlogs] = useState([
-    { blogName: "React Native", id: Date.now().toString(), isEdit: false },
-  ]);
-  const [isEdit, setIsEdit] = useState(false);
-
+export default function HomeScreen({ blogs }) {
   return (
     <View style={styles.container}>
       <FlatList
@@ -23,7 +17,7 @@ export default function HomeScreen() {
             <TouchableOpacity>
               <View style={styles.flatListContainer}>
                 <View>
-                  <Text style={styles.text}>{item.blogName}</Text>
+                  <Text style={styles.text}>{item.blogHead}</Text>
                 </View>
                 <View>
                   <View>
