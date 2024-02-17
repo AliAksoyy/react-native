@@ -7,7 +7,10 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function HomeScreen({ navigation, blogs }) {
+export default function HomeScreen({ navigation, blogs, setBlogs }) {
+  const handleDelete = (item) => {
+    setBlogs(blogs.filter((data) => data.id !== item.id));
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -28,7 +31,12 @@ export default function HomeScreen({ navigation, blogs }) {
               <View>
                 <TouchableOpacity>
                   <View>
-                    <AntDesign name="delete" size={24} color="black" />
+                    <AntDesign
+                      name="delete"
+                      size={24}
+                      color="black"
+                      onPress={() => handleDelete(item)}
+                    />
                   </View>
                 </TouchableOpacity>
               </View>

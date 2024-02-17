@@ -38,13 +38,17 @@ export default function App() {
         })}
       >
         <Stack.Screen name="AnaSayfa">
-          {(props) => <HomeScreen {...props} blogs={blogs} />}
+          {(props) => (
+            <HomeScreen {...props} blogs={blogs} setBlogs={setBlogs} />
+          )}
         </Stack.Screen>
         <Stack.Screen name="NewBlog">
           {(props) => <NewBlogScreen {...props} setBlogs={setBlogs} />}
         </Stack.Screen>
         <Stack.Screen name="Content">
-          {(props) => <DetailScreen {...props} setBlogs={setBlogs} />}
+          {(props) => (
+            <DetailScreen {...props} setBlogs={setBlogs} blogs={blogs} />
+          )}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
