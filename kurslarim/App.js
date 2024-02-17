@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button, View, FlatList, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Button,
+  View,
+  FlatList,
+  Text,
+  ScrollView,
+} from "react-native";
 import { useState } from "react";
 import CourseInput from "./components/CourseInput";
 
@@ -25,26 +32,28 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <View style={styles.container}>
-        <Button onPress={startModal} title="kurs ekle" color="red" />
-        <CourseInput
-          visible={modalIsVisible}
-          onAddCourse={addCourse}
-          onCancel={endModal}
-        />
-        <ScrollView>
-          <FlatList
-            data={courses}
-            renderItem={({ item }) => {
-              return (
-                <View style={styles.courseItem}>
-                  <Text style={styles.courseText}>{item.tect}</Text>
-                </View>
-              );
-            }}
+      <ScrollView>
+        <View style={styles.container}>
+          <Button onPress={startModal} title="kurs ekle" color="red" />
+          <CourseInput
+            visible={modalIsVisible}
+            onAddCourse={addCourse}
+            onCancel={endModal}
           />
-        </ScrollView>
-      </View>
+          <View>
+            <FlatList
+              data={courses}
+              renderItem={({ item }) => {
+                return (
+                  <View style={styles.courseItem}>
+                    <Text style={styles.courseText}>{item.tect}</Text>
+                  </View>
+                );
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </>
   );
 }

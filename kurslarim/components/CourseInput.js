@@ -21,7 +21,7 @@ export default function CourseInput({ visible, onAddCourse, onCancel }) {
   };
 
   return (
-    <Modal animationType="slide" visible={visible}>
+    <Modal animationType="fade" visible={visible}>
       <View style={styles.inputContainer}>
         <Image
           style={styles.image}
