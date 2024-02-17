@@ -1,21 +1,49 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button, View } from "react-native";
+import { StyleSheet, Button, View, FlatList, Text } from "react-native";
 import { useState } from "react";
 import CourseInput from "./components/CourseInput";
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [courses, setCourses] = useState([]);
+
+  const startModal = () => {
+    setModalIsVisible(true);
+  };
+
+  const endModal = () => {
+    setModalIsVisible(false);
+  };
+  const addCourse = (courseTitle) => {
+    setCourses((course) => [
+      ...course,
+      { tect: courseTitle, id: Math.random().toString() },
+    ]);
+    endModal();
+  };
 
   return (
     <>
       <StatusBar style="light" />
       <View style={styles.container}>
-        <Button
-          onPress={() => setModalIsVisible(true)}
-          title="kurs ekle"
-          color="red"
+        <Button onPress={startModal} title="kurs ekle" color="red" />
+        <CourseInput
+          visible={modalIsVisible}
+          onAddCourse={addCourse}
+          onCancel={endModal}
         />
-        <CourseInput visible={modalIsVisible} />
+        <View>
+          <FlatList
+            data={courses}
+            renderItem={({ item }) => {
+              return (
+                <View>
+                  <Text>{item.tect}</Text>
+                </View>
+              );
+            }}
+          />
+        </View>
       </View>
     </>
   );
