@@ -22,7 +22,9 @@ export default function HomeScreen({ navigation, blogs, setBlogs }) {
                 style={{
                   flex: 1,
                 }}
-                onPress={() => navigation.navigate("Content", item)}
+                onPress={() =>
+                  navigation.navigate("Content", { ...item, isEdit: true })
+                }
               >
                 <View>
                   <Text style={styles.text}>{item.blogHead}</Text>
