@@ -1,42 +1,60 @@
-import { createContext, useContext, useReducer } from "react";
+import React, { useState, useReducer } from 'react';
+import createDataContext from './createDataContext';
+import jsonServer from '../api/jsonServer';
 
-const BlogContext = createContext();
+const blogReducer = (state, action) => {
+  switch (action.type) {
+    case 'get_blogposts':
+      return action.payload;
 
-const blogReducer = (state, { type, payload }) => {
-  switch (type) {
-    case "add":
-      return [...state, payload];
-    case "delete":
-      return state.filter((item) => item.id !== payload.id);
-    case "edit":
-      return state.map((item) => {
-        return item.id === payload.id ? payload : item;
+    case 'edit_blogpost':
+      return state.map((blogPost) => {
+        return blogPost.id === action.payload.id ? action.payload : blogPost;
       });
+
+    case 'delete_blogpost':
+      return state.filter((blogPost) => blogPost.id !== action.payload);
     default:
       return state;
   }
 };
 
-export const BlogProvider = ({ children }) => {
-  const [blogs, dispatch] = useReducer(blogReducer, []);
+const addBlogPost = (dispatch) => {
+  return async (title, content, callback) => {
+    await jsonServer.post('/blogposts', { title, content });
 
-  const addBlog = (blog) => {
-    dispatch({ type: "add", payload: blog });
+    if (callback) {
+      callback();
+    }
   };
-  const deleteBlog = (blog) => {
-    dispatch({ type: "delete", payload: blog });
-  };
-  const editBlog = (blog) => {
-    dispatch({ type: "edit", payload: blog });
-  };
+};
+const editBlogPost = (dispatch) => {
+  return async (id, title, content, callback) => {
+    await jsonServer.put(`/blogposts/${id}`, { title, content });
 
-  return (
-    <BlogContext.Provider value={{ blogs, addBlog, deleteBlog, editBlog }}>
-      {children}
-    </BlogContext.Provider>
-  );
+    dispatch({ type: 'edit_blogpost', payload: { id, title, content } });
+    if (callback) {
+      callback();
+    }
+  };
 };
 
-export const useBlogContext = () => {
-  return useContext(BlogContext);
+const getBlogPosts = (dispatch) => {
+  return async () => {
+    const response = await jsonServer.get('/blogposts');
+    dispatch({ type: 'get_blogposts', payload: response.data });
+  };
 };
+
+const deleteBlogPost = (dispatch) => {
+  return async (id) => {
+    await jsonServer.delete(`/blogposts/${id}`);
+    dispatch({ type: 'delete_blogpost', payload: id });
+  };
+};
+
+export const { Context, Provider } = createDataContext(
+  blogReducer,
+  { addBlogPost, deleteBlogPost, editBlogPost, getBlogPosts },
+  []
+);

@@ -1,67 +1,52 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./screens/HomeScreen";
-import EditScreen from "./screens/EditScreen";
-import CreateScreen from "./screens/CreateScreen";
-import ShowScreen from "./screens/ShowScreen";
-import { BlogProvider } from "./context/BlogContext";
-import { Entypo } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import IndexScreen from './screens/IndexScreen';
+import CreateScreen from './screens/CreateScreen';
+import { Provider } from './context/BlogContext';
+import ShowScreen from './screens/ShowScreen';
+import { AntDesign } from '@expo/vector-icons';
+import EditScreen from './screens/EditScreen';
+import { EvilIcons } from '@expo/vector-icons';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <BlogProvider>
+    <Provider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerTitle: "BlogUygulamsı" }}>
+        <Stack.Navigator screenOptions={{ headerTitle: 'Blog Uygulaması' }}>
           <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={({ navigation, route }) => ({
-              headerRight: () => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate("Create")}
-                  >
-                    <Entypo
-                      style={{ fontWeight: "bold" }}
-                      name="plus"
-                      size={26}
-                      color="black"
-                    />
-                  </TouchableOpacity>
-                );
-              },
+            name="Index"
+            component={IndexScreen}
+            options={({ navigation }) => ({
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+                  <AntDesign name="plus" size={24} color="black" />
+                </TouchableOpacity>
+              ),
             })}
           />
-          <Stack.Screen name="Edit" component={EditScreen} />
           <Stack.Screen name="Create" component={CreateScreen} />
           <Stack.Screen
             name="Show"
-            options={({ navigation, route }) => {
-              return {
-                headerRight: () => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate("Edit", route.params)}
-                    >
-                      <AntDesign
-                        style={{ fontWeight: "bold" }}
-                        name="edit"
-                        size={30}
-                        color="black"
-                      />
-                    </TouchableOpacity>
-                  );
-                },
-              };
-            }}
             component={ShowScreen}
+            options={({ navigation, route }) => ({
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('Edit', { id: route.params.id })
+                  }
+                >
+                  <EvilIcons name="pencil" size={35} color="black" />
+                </TouchableOpacity>
+              ),
+            })}
           />
+          <Stack.Screen name="Edit" component={EditScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </BlogProvider>
+    </Provider>
   );
 }

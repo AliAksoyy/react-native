@@ -1,22 +1,19 @@
-import { StyleSheet, View } from "react-native";
-import React from "react";
-import { useBlogContext } from "../context/BlogContext";
-import Blog from "../components/Blog";
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import BlogPostForm from '../components/BlogPostForm';
+import { useContext } from 'react';
+import { Context } from '../context/BlogContext';
 
-export default function CreateScreen({ navigation, route }) {
-  const { addBlog } = useBlogContext();
+export default function CreateScreen({ navigation }) {
+  const { addBlogPost } = useContext(Context);
   return (
-    <View style={styles.container}>
-      <Blog
-        route={route}
-        navigation={navigation}
-        title="Kaydet"
-        btn={addBlog}
-      />
-    </View>
+    <BlogPostForm
+      isEditable={false}
+      onSubmit={(title, content) => {
+        addBlogPost(title, content, () => navigation.navigate('Index'));
+      }}
+    />
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "flex-start", margin: 15 },
-});
+const styles = StyleSheet.create({});

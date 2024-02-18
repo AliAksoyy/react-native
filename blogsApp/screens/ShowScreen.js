@@ -1,31 +1,42 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useEffect } from "react";
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { useContext } from 'react';
+import { Context } from '../context/BlogContext';
 
 export default function ShowScreen({ route }) {
-  useEffect(() => {}, []);
+  const { state } = useContext(Context);
+  console.log(route.params.id);
+  const blogPost = state.find((blogPost) => blogPost.id === route.params.id);
   return (
-    <>
+    <View style={styles.mainContainer}>
       <View style={styles.container}>
-        <Text style={styles.text}>Başlık</Text>
-        <TextInput value={route.params.title} style={styles.input} />
+        <Text style={styles.label}>Başlık</Text>
+        <Text style={styles.content}>{blogPost.title}</Text>
       </View>
       <View style={styles.container}>
-        <Text style={styles.text}>İçerik</Text>
-        <TextInput value={route.params.content} style={styles.input} />
+        <Text style={styles.label}>İçerik</Text>
+        <Text style={styles.content}>{blogPost.content}</Text>
       </View>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#000",
-    marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 20,
+  mainContainer: {
+    alignItems: 'center',
+    marginTop: 10,
   },
-  text: { fontSize: 21 },
-  input: { fontSize: 19 },
+  container: {
+    borderWidth: 1,
+    marginBottom: 10,
+    borderRadius: 30,
+    alignItems: 'center',
+    width: '80%',
+  },
+  label: {
+    fontSize: 30,
+  },
+  content: {
+    fontSize: 18,
+  },
 });
