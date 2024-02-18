@@ -40,20 +40,24 @@ export default function App() {
           <Stack.Screen name="Create" component={CreateScreen} />
           <Stack.Screen
             name="Show"
-            options={({ navigation, route }) => ({
-              headerRight: () => {
-                return (
-                  <TouchableOpacity onPress={() => navigation.pop()}>
-                    <AntDesign
-                      style={{ fontWeight: "bold" }}
-                      name="edit"
-                      size={30}
-                      color="black"
-                    />
-                  </TouchableOpacity>
-                );
-              },
-            })}
+            options={({ navigation, route }) => {
+              return {
+                headerRight: () => {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Edit", route.params)}
+                    >
+                      <AntDesign
+                        style={{ fontWeight: "bold" }}
+                        name="edit"
+                        size={30}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+                  );
+                },
+              };
+            }}
             component={ShowScreen}
           />
         </Stack.Navigator>
