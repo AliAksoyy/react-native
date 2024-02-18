@@ -12,8 +12,12 @@ export default function App() {
   return (
     <BlogProvider>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Navigator screenOptions={{ headerTitle: "s" }}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={({ navigation, route }) => {}}
+          />
           <Stack.Screen name="Edit" component={EditScreen} />
           <Stack.Screen name="Create" component={CreateScreen} />
           <Stack.Screen name="Show" component={ShowScreen} />
