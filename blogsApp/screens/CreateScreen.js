@@ -1,24 +1,40 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useBlogContext } from "../context/BlogContext";
 
-export default function CreateScreen() {
+export default function CreateScreen({ navigation }) {
+  const [value, setValue] = useState({
+    title: "",
+    content: "",
+  });
+
   const { addBlog } = useBlogContext();
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.text}>Başlık Giriniz:</Text>
-        <TextInput style={styles.input} />
+        <TextInput
+          value={value.title}
+          onChangeText={(text) => setValue({ ...value, title: text })}
+          style={styles.input}
+        />
       </View>
       <View style={styles.head}>
         <Text style={styles.text}>İçeriği Giriniz:</Text>
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          value={value.content}
+          onChangeText={(text) => setValue({ ...value, content: text })}
+        />
       </View>
       <View style={styles.button}>
         <Button
           title="Kaydet"
           color="green"
-          onPress={() => addBlog({ title: "a", content: "b" })}
+          onPress={() => {
+            addBlog({ ...value, id: Date.now() });
+            navigation.pop();
+          }}
         />
       </View>
     </View>

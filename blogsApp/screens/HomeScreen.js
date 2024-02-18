@@ -10,21 +10,28 @@ import { useBlogContext } from "../context/BlogContext";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function HomeScreen({ navigation }) {
-  const { blogs } = useBlogContext();
-  console.log(blogs);
+  const { blogs, deleteBlog } = useBlogContext();
+
   return (
     <View style={styles.main}>
       <FlatList
         data={blogs}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => {
+                navigation.navigate("Show", item);
+              }}
+            >
               <Text style={styles.text}>{item.title}</Text>
               <AntDesign
                 name="delete"
                 size={24}
                 color="black"
-                onPress={() => {}}
+                onPress={() => {
+                  deleteBlog(item);
+                }}
               />
             </TouchableOpacity>
           );

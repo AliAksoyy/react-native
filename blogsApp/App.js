@@ -7,6 +7,7 @@ import ShowScreen from "./screens/ShowScreen";
 import { BlogProvider } from "./context/BlogContext";
 import { Entypo } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,7 +38,24 @@ export default function App() {
           />
           <Stack.Screen name="Edit" component={EditScreen} />
           <Stack.Screen name="Create" component={CreateScreen} />
-          <Stack.Screen name="Show" component={ShowScreen} />
+          <Stack.Screen
+            name="Show"
+            options={({ navigation, route }) => ({
+              headerRight: () => {
+                return (
+                  <TouchableOpacity onPress={() => navigation.pop()}>
+                    <AntDesign
+                      style={{ fontWeight: "bold" }}
+                      name="edit"
+                      size={30}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                );
+              },
+            })}
+            component={ShowScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </BlogProvider>
