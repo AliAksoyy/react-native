@@ -3,11 +3,16 @@ import React from "react";
 import { useBlogContext } from "../context/BlogContext";
 import Blog from "../components/Blog";
 
-export default function CreateScreen({ navigation }) {
+export default function CreateScreen({ navigation, route }) {
   const { addBlog } = useBlogContext();
   return (
     <View style={styles.container}>
-      <Blog navigation={navigation} title="Kaydet" btn={addBlog} />
+      <Blog
+        route={route}
+        navigation={navigation}
+        title="Kaydet"
+        btn={addBlog}
+      />
     </View>
   );
 }

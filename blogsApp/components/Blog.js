@@ -29,7 +29,10 @@ export default function Blog({ route, navigation, title, btn }) {
           title={title}
           color="green"
           onPress={() => {
-            btn({ ...value, id: Date.now() });
+            btn({
+              ...value,
+              id: title !== "Güncelle" ? Date.now() : route.params.id,
+            });
             navigation.pop();
           }}
         />

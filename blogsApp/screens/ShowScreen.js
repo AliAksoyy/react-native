@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function ShowScreen({ route }) {
+  useEffect(() => {}, []);
   return (
     <>
       <View style={styles.container}>
