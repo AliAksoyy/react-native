@@ -8,16 +8,15 @@ const blogReducer = (state, { type, payload }) => {
       return [...state, payload];
     case "delete":
       return state.filter((item) => item.id !== payload.id);
+    case "edit":
+      return state.map((item) => (item.id !== payload.id ? item : payload));
     default:
       return state;
   }
 };
 
 export const BlogProvider = ({ children }) => {
-  const [blogs, dispatch] = useReducer(blogReducer, [
-    { title: "react", content: "good", id: Date.now() },
-    { title: "js", content: "good", id: Date.now() },
-  ]);
+  const [blogs, dispatch] = useReducer(blogReducer, []);
 
   const addBlog = (blog) => {
     dispatch({ type: "add", payload: blog });
@@ -25,9 +24,12 @@ export const BlogProvider = ({ children }) => {
   const deleteBlog = (blog) => {
     dispatch({ type: "delete", payload: blog });
   };
+  const editBlog = (blog) => {
+    dispatch({ type: "edit", payload: blog });
+  };
 
   return (
-    <BlogContext.Provider value={{ blogs, addBlog, deleteBlog }}>
+    <BlogContext.Provider value={{ blogs, addBlog, deleteBlog, editBlog }}>
       {children}
     </BlogContext.Provider>
   );
