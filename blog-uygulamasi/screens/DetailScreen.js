@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View,InteractionManager } from "react-native";
 import React, { useState } from "react";
 
 export default function DetailScreen({ route, setBlogs, blogs }) {
