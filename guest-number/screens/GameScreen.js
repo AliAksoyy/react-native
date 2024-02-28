@@ -1,10 +1,13 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import ComputerNumber from "../components/ComputerNumber";
 import CustomButton from "../components/CustomButton";
 
-export default function GameScreen({ userNumber }) {
+let minNumber = 1;
+let maxNumber = 100;
+
+export default function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateNumber(1, 100, userNumber);
 
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
@@ -17,9 +20,6 @@ export default function GameScreen({ userNumber }) {
       return randomNumber;
     }
   }
-
-  let minNumber = 1;
-  let maxNumber = 100;
 
   function nextGuessHandler(direction) {
     if (
@@ -40,6 +40,13 @@ export default function GameScreen({ userNumber }) {
     const newRandomNumber = generateNumber(minNumber, maxNumber, currentGuess);
     setCurrentGuess(newRandomNumber);
   }
+
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      onGameOver();
+    }
+  }, [currentGuess, userNumber, onGameOver]);
+
   return (
     <View style={styles.container}>
       <Title>Bilgisayar Tahmini</Title>
