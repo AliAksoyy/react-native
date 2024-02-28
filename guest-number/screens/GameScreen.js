@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Title from "../components/Title";
 import ComputerNumber from "../components/ComputerNumber";
+import CustomButton from "../components/CustomButton";
 
 export default function GameScreen({ userNumber }) {
   const initialGuess = generateNumber(1, 100, userNumber);
@@ -11,10 +12,33 @@ export default function GameScreen({ userNumber }) {
   function generateNumber(min, max, exclude) {
     let randomNumber = Math.floor(Math.random() * (max - min)) + min;
     if (randomNumber === exclude) {
-      return randomNumber(min, max,exclude);
+      return randomNumber(min, max, exclude);
     } else {
       return randomNumber;
     }
+  }
+
+  let minNumber = 1;
+  let maxNumber = 100;
+
+  function nextGuessHandler(direction) {
+    if (
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
+    ) {
+      Alert.alert("Hadi Ordan", "Yanlış olduğunu bile bile basıyorsun", [
+        { text: "Tamam", style: "cancel" },
+      ]);
+      return;
+    }
+
+    if (direction === "lower") {
+      maxNumber = currentGuess;
+    } else {
+      minNumber = currentGuess + 1;
+    }
+    const newRandomNumber = generateNumber(minNumber, maxNumber, currentGuess);
+    setCurrentGuess(newRandomNumber);
   }
   return (
     <View style={styles.container}>
@@ -22,6 +46,14 @@ export default function GameScreen({ userNumber }) {
       <ComputerNumber>{currentGuess}</ComputerNumber>
       <View>
         <Text>Altında mı üstünde mi ?</Text>
+        <View>
+          <CustomButton onPress={nextGuessHandler.bind(this, "lower")}>
+            -
+          </CustomButton>
+          <CustomButton onPress={nextGuessHandler.bind(this, "greater")}>
+            +
+          </CustomButton>
+        </View>
       </View>
     </View>
   );
