@@ -18,10 +18,12 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     padding: 15,
+    marginVertical: 10,
     elevation: 4,
     shadowColor: "white",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
+    borderColor: "yellow",
   },
 });

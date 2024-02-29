@@ -73,13 +73,16 @@ export default function GameScreen({ userNumber, onGameOver }) {
       <View style={styles.listContainer}>
         <FlatList
           data={guessCounts}
-          renderItem={(itemData) => (
-            <ComputerGuess
-              roundNumber={guessCounts.length - itemData.index}
-              guess={itemData.item}
-            />
-          )}
-          keyExtractor={(itemData = itemData)}
+          renderItem={(itemData) => {
+            console.log("itemData", itemData);
+            return (
+              <ComputerGuess
+                roundNumber={guessCounts.length - itemData.index}
+                guess={itemData.item}
+              />
+            );
+          }}
+          keyExtractor={(itemData) => itemData}
         />
       </View>
     </View>
@@ -112,5 +115,5 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 15,
   },
-  listContainer:{flex:1,marginTop:10}
+  listContainer: { flex: 1, marginTop: 10 },
 });
