@@ -5,7 +5,7 @@ import ButtonWhite from "./ButtonWhite";
 
 export default function AuthContents({ isLogin }) {
   return (
-    <View>
+    <View style={styles.container}>
       <AuthForm isLogin={isLogin} />
       <View>
         <ButtonWhite>
@@ -16,4 +16,17 @@ export default function AuthContents({ isLogin }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "blueviolet",
+    marginTop: 50,
+    marginHorizontal: 30,
+    padding: 15,
+    borderRadius: 20,
+    elevation: 4,
+    shadowColor: "black",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+});
