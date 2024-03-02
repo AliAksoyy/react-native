@@ -9,10 +9,12 @@ import SignUpScreen from "./screens/SignUpScreen";
 const Stack = createNativeStackNavigator();
 
 function NormalStack() {
-  <Stack.Navigator>
-    <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="SignUp" component={SignUpScreen} />
-  </Stack.Navigator>;
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+    </Stack.Navigator>
+  );
 }
 
 export default function App() {
