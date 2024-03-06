@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 
-export default function Button({ children }) {
+export default function Button({ children, submit }) {
   return (
     <Pressable
+      onPress={submit}
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
     >
       <View>

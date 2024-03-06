@@ -28,7 +28,11 @@ function NormalStack() {
           headerTitle: "Kullanıcı Giriş",
         }}
       />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ headerTitle: "Kullanıcı Kayıt" }}
+      />
     </Stack.Navigator>
   );
 }

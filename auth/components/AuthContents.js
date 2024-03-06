@@ -14,9 +14,13 @@ export default function AuthContents({ isLogin }) {
       navigation.navigate("Login");
     }
   }
+
+  function submitHandler(credantials) {
+    console.log(credantials);
+  }
   return (
     <View style={styles.container}>
-      <AuthForm isLogin={isLogin} />
+      <AuthForm onSubmit={submitHandler} isLogin={isLogin} />
       <View>
         <ButtonWhite onPress={switchScreen}>
           {isLogin ? "Yeni Kullanıcı Oluştur" : "Giriş Yap"}
