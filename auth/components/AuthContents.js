@@ -1,11 +1,17 @@
-import { StyleSheet, Text, View, Alert } from "react-native";
-import React from "react";
+import { StyleSheet, View, Alert } from "react-native";
+import React, { useState } from "react";
 import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
 import { useNavigation } from "@react-navigation/native";
 
 export default function AuthContents({ isLogin }) {
   const navigation = useNavigation();
+  const [credentialIsInvalid, setCredentialIsInvalid] = useState({
+    email: false,
+    password: false,
+    confirmEmail: false,
+    confirmPassword: false,
+  });
 
   function switchScreen() {
     if (isLogin) {
@@ -32,12 +38,22 @@ export default function AuthContents({ isLogin }) {
       (!isLogin && (!emailIsAreEqual || !passwordIsAreEqual))
     ) {
       Alert.alert("Hops!", "Lütfen girdiğiniz değerleri kontrol ediniz!");
+      setCredentialIsInvalid({
+        email: !emailIsValid,
+        confirmEmail: !emailIsValid || !emailIsAreEqual,
+        password: !passwordIsValid,
+        confirmPassword: !passwordIsValid || !passwordIsAreEqual,
+      });
       return;
     }
   }
   return (
     <View style={styles.container}>
-      <AuthForm onSubmit={submitHandler} isLogin={isLogin} />
+      <AuthForm
+        credentialIsInvalid={credentialIsInvalid}
+        onSubmit={submitHandler}
+        isLogin={isLogin}
+      />
       <View>
         <ButtonWhite onPress={switchScreen}>
           {isLogin ? "Yeni Kullanıcı Oluştur" : "Giriş Yap"}

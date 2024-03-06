@@ -7,12 +7,15 @@ export default function Input({
   onUpdateValue,
   value,
   secure,
+  isInValid,
 }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, isInValid && styles.labelInvalid]}>
+        {label}
+      </Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, isInValid && styles.inputInvalid]}
         autoCapitalize="none"
         keyboardType={keyboardType}
         onChangeText={onUpdateValue}
@@ -35,5 +38,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     fontSize: 16,
+  },
+  labelInvalid: {
+    color: "red",
+  },
+  inputInvalid: {
+    backgroundColor: "red",
   },
 });
