@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import React from "react";
 import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
@@ -16,7 +16,24 @@ export default function AuthContents({ isLogin }) {
   }
 
   function submitHandler(credantials) {
-    console.log(credantials);
+    let { confirmEmail, confirmPassword, email, password } = credantials;
+
+    email = email.trim();
+    password = password.trim();
+
+    const emailIsValid = email.includes("@");
+    const passwordIsValid = password.length > 6;
+    const emailIsAreEqual = email === confirmEmail;
+    const passwordIsAreEqual = password === confirmPassword;
+
+    if (
+      !emailIsValid ||
+      !passwordIsValid ||
+      (!isLogin && (!emailIsAreEqual || !passwordIsAreEqual))
+    ) {
+      Alert.alert("Hops!", "Lütfen girdiğiniz değerleri kontrol ediniz!");
+      return;
+    }
   }
   return (
     <View style={styles.container}>
