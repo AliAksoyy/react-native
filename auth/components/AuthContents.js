@@ -4,7 +4,7 @@ import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AuthContents({ isLogin, onAuthenticate }) {
+export default function AuthContents({ isLogin, signIn, onAuthenticate }) {
   const navigation = useNavigation();
   const [credentialIsInvalid, setCredentialIsInvalid] = useState({
     email: false,
@@ -46,7 +46,7 @@ export default function AuthContents({ isLogin, onAuthenticate }) {
       });
       return;
     }
-    onAuthenticate({ email, password });
+    isLogin ? signIn({ email, password }) : onAuthenticate({ email, password });
   }
   return (
     <View style={styles.container}>

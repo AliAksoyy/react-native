@@ -33,6 +33,7 @@ function NormalStack() {
         component={SignUpScreen}
         options={{ headerTitle: "Kullanıcı Kayıt" }}
       />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );
 }

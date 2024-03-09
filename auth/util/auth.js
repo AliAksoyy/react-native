@@ -13,3 +13,14 @@ export async function createUser(email, password) {
     console.log(error);
   }
 }
+export async function signInFireBase(email, password) {
+  try {
+    const response = await axios.post(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+        API_KEY,
+      { email: email, password: password, returnSecureToken: true }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}

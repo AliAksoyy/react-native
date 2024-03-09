@@ -4,13 +4,14 @@ import AuthContents from "../components/AuthContents";
 import { createUser } from "../util/auth";
 import Loading from "../components/Loading";
 
-export default function SignUpScreen() {
+export default function SignUpScreen({ navigation }) {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
 
   async function signUpHandler({ email, password }) {
     setIsAuthanticating(true);
     await createUser(email, password);
     setIsAuthanticating(false);
+    navigation.navigate("Login");
   }
 
   if (isAuthanticating) {
