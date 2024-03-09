@@ -3,12 +3,11 @@ import React from "react";
 import AuthContents from "../components/AuthContents";
 import { createUser } from "../util/auth";
 
-export default function SignUpScreen() {
-  async function signUpHandler({ email, password }) {
-    let a = await createUser(email, password);
-    console.log(a);
-  }
+async function signUpHandler({ email, password }) {
+  await createUser(email, password);
+}
 
+export default function SignUpScreen() {
   return <AuthContents onAuthenticate={signUpHandler} />;
 }
 
