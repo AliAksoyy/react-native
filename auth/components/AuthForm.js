@@ -38,7 +38,7 @@ export default function AuthForm({ isLogin, onSubmit, credentialIsInvalid }) {
       email: enteredEmail,
       confirmEmail: enteredConfirmEmail,
       password: enteredPassword,
-      confirmPassword: enteredConfirmEmail,
+      confirmPassword: enteredConfirmPassword,
     });
   }
 
