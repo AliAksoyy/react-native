@@ -14,7 +14,7 @@ export default function LoginScreen({ navigation }) {
       setIsAuthanticating(false);
       navigation.navigate("Home");
     } catch (error) {
-      Alert.alert("kayıt olunamadı", "Lütfen bilgilerinizi kontrol ediniz..");
+      Alert.alert("giriş yapılamadı", "Lütfen bilgilerinizi kontrol ediniz..");
       setIsAuthanticating(false);
     }
   }
