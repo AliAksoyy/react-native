@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import { login } from "../util/auth";
 import { useAuthContext } from "../context/authContext";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
   const { authenticate, token } = useAuthContext();
 
@@ -15,7 +15,6 @@ export default function LoginScreen({ navigation }) {
       const token = await login(email, password);
       authenticate(token);
       setIsAuthanticating(false);
-      navigation.navigate("Home");
     } catch (error) {
       Alert.alert("giriş yapılamadı", "Lütfen bilgilerinizi kontrol ediniz..");
       setIsAuthanticating(false);

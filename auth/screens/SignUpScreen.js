@@ -5,7 +5,7 @@ import { createUser } from "../util/auth";
 import Loading from "../components/Loading";
 import { useAuthContext } from "../context/authContext";
 
-export default function SignUpScreen({ navigation }) {
+export default function SignUpScreen() {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
 
   const { authenticate, token } = useAuthContext();
@@ -16,7 +16,6 @@ export default function SignUpScreen({ navigation }) {
       const token = await createUser(email, password);
       authenticate(token);
       setIsAuthanticating(false);
-      navigation.navigate("Login");
     } catch (error) {
       Alert.alert("kayıt olunamadı", "Lütfen bilgilerinizi kontrol ediniz..");
       setIsAuthanticating(false);
