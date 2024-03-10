@@ -15,7 +15,7 @@ export default function LoginScreen({ navigation }) {
   }
 
   if (isAuthanticating) {
-    return <Loading message="Kullanıcı Oluşturuluyor" />;
+    return <Loading message="Kullanıcı Giriş yapıyor" />;
   }
   return <AuthContents onAuthenticate={loginHandler} v isLogin />;
 }
