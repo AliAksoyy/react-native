@@ -11,13 +11,13 @@ export default function LoginScreen({ navigation }) {
     setIsAuthanticating(true);
     await login(email, password);
     setIsAuthanticating(false);
-    navigation.navigate("Login");
+    navigation.navigate("Home");
   }
 
   if (isAuthanticating) {
     return <Loading message="Kullanıcı Giriş yapıyor" />;
   }
-  return <AuthContents onAuthenticate={loginHandler} v isLogin />;
+  return <AuthContents onAuthenticate={loginHandler} isLogin />;
 }
 
 const styles = StyleSheet.create({});
