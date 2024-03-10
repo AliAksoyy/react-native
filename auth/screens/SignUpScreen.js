@@ -8,8 +8,7 @@ import { useAuthContext } from "../context/authContext";
 export default function SignUpScreen() {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
 
-  const { authenticate, token } = useAuthContext();
-  console.log("token", token);
+  const { authenticate } = useAuthContext();
   async function signUpHandler({ email, password }) {
     setIsAuthanticating(true);
     try {

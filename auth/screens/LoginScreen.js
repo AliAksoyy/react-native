@@ -7,7 +7,7 @@ import { useAuthContext } from "../context/authContext";
 
 export default function LoginScreen() {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
-  const { authenticate, token } = useAuthContext();
+  const { authenticate } = useAuthContext();
 
   async function loginHandler({ email, password }) {
     setIsAuthanticating(true);
