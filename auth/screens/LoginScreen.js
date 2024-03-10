@@ -1,23 +1,23 @@
 import { StyleSheet } from "react-native";
 import React, { useState } from "react";
 import AuthContents from "../components/AuthContents";
-import { signInFireBase } from "../util/auth";
 import Loading from "../components/Loading";
+import { login } from "../util/auth";
 
 export default function LoginScreen({ navigation }) {
-  const [loading, setLoading] = useState(false);
+  const [isAuthanticating, setIsAuthanticating] = useState(false);
 
-  const handleSign = async ({ email, password }) => {
-    setLoading(true);
-    await signInFireBase(email, password);
-    setLoading(false);
-    navigation.navigate("Home");
-  };
-
-  if (loading) {
-    <Loading message="Giriş Yapılıyor.." />;
+  async function loginHandler({ email, password }) {
+    setIsAuthanticating(true);
+    await login(email, password);
+    setIsAuthanticating(false);
+    navigation.navigate("Login");
   }
-  return <AuthContents signIn={handleSign} isLogin />;
+
+  if (isAuthanticating) {
+    return <Loading message="Kullanıcı Oluşturuluyor" />;
+  }
+  return <AuthContents onAuthenticate={loginHandler} v isLogin />;
 }
 
 const styles = StyleSheet.create({});
