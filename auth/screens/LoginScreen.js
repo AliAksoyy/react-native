@@ -3,14 +3,17 @@ import React, { useState } from "react";
 import AuthContents from "../components/AuthContents";
 import Loading from "../components/Loading";
 import { login } from "../util/auth";
+import { useAuthContext } from "../context/authContext";
 
 export default function LoginScreen({ navigation }) {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
+  const { authenticate, token } = useAuthContext();
 
   async function loginHandler({ email, password }) {
     setIsAuthanticating(true);
     try {
-      await login(email, password);
+      const token = await login(email, password);
+      authenticate(token);
       setIsAuthanticating(false);
       navigation.navigate("Home");
     } catch (error) {

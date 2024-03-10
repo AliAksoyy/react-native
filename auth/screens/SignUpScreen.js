@@ -3,14 +3,18 @@ import React, { useState } from "react";
 import AuthContents from "../components/AuthContents";
 import { createUser } from "../util/auth";
 import Loading from "../components/Loading";
+import { useAuthContext } from "../context/authContext";
 
 export default function SignUpScreen({ navigation }) {
   const [isAuthanticating, setIsAuthanticating] = useState(false);
 
+  const { authenticate, token } = useAuthContext();
+  console.log("token", token);
   async function signUpHandler({ email, password }) {
     setIsAuthanticating(true);
     try {
-      await createUser(email, password);
+      const token = await createUser(email, password);
+      authenticate(token);
       setIsAuthanticating(false);
       navigation.navigate("Login");
     } catch (error) {
