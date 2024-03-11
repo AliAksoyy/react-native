@@ -6,7 +6,7 @@ import CategoryGrid from "../components/CategoryGrid";
 export default function Categories({ navigation }) {
   function renderCategoryItem({ item }) {
     function pressHandler() {
-      navigation.navigate("FoodOverView");
+      navigation.navigate("FoodOverView", { categoryId: item.id });
     }
     return (
       <CategoryGrid
