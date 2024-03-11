@@ -1,11 +1,20 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import React from "react";
 import { CATEGORIES } from "../data/dummy-data";
-import CategoryGrid from "./components/CategoryGrid";
+import CategoryGrid from "../components/CategoryGrid";
 
-export default function Categories() {
+export default function Categories({ navigation }) {
   function renderCategoryItem({ item }) {
-    return <CategoryGrid title={item.title} color={item.color} />;
+    function pressHandler() {
+      navigation.navigate("FoodOverView");
+    }
+    return (
+      <CategoryGrid
+        pressFood={pressHandler}
+        title={item.title}
+        color={item.color}
+      />
+    );
   }
 
   return (
