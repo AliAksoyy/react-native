@@ -8,8 +8,18 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Categories" component={Categories} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: "blue" },
+          headerTintColor: "white",
+          contentStyle: { backgroundColor: "lightblue" },
+        }}
+      >
+        <Stack.Screen
+          name="Categories"
+          component={Categories}
+          options={{ title: "Tüm Kategoriler" }}
+        />
         <Stack.Screen name="FoodOverView" component={FoodOverviewScreen} />
       </Stack.Navigator>
     </NavigationContainer>
