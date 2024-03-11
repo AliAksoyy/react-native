@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { FOODS } from "../data/dummy-data";
 
 export default function FoodItem({
   id,
