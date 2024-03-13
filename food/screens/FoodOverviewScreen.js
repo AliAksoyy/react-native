@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { FOODS, CATEGORIES } from "../data/dummy-data";
-import FoodItem from "../components/FoodItem";
+import FoodList from "../components/FoodList";
 
 export default function FoodOverviewScreen({ navigation, route }) {
   const { categoryId } = route.params;
@@ -15,19 +15,7 @@ export default function FoodOverviewScreen({ navigation, route }) {
     navigation.setOptions({ title: categoryTitle });
   }, [navigation, categoryId]);
 
-  function renderFoodItem({ item }) {
-    return <FoodItem {...item} />;
-  }
-
-  return (
-    <View>
-      <FlatList
-        data={displayFoods}
-        keyExtractor={(item) => item.id}
-        renderItem={renderFoodItem}
-      />
-    </View>
-  );
+  return <FoodList displayFoods={displayFoods} />;
 }
 
 const styles = StyleSheet.create({});
