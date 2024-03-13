@@ -16,7 +16,6 @@ export default function CoursesSummary({ courses, periodName }) {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
