@@ -9,10 +9,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const MyTabs = () => {
+const CourseOverView = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen></Tab.Screen>
+      <Tab.Screen name="RecentCourses" component={RecentCourses} />
+      <Tab.Screen name="AllCourses" component={AllCourses} />
     </Tab.Navigator>
   );
 };
@@ -20,10 +21,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="AllCourses" component={AllCourses} />
-        <Stack.Screen name="RecentCourses" component={RecentCourses} />
+        <Stack.Screen
+          name="CourseOverView"
+          component={CourseOverView}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="ManageCourse" component={ManageCourse} />
-        <Stack.Screen name="MyTabs" component={MyTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
