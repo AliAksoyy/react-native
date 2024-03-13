@@ -6,16 +6,29 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useContext } from "react";
 import { FOODS } from "../data/dummy-data";
 import FoodIngredients from "../components/FoodIngredients";
-import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { FavoriteContext } from "../context/favoriteContext";
 
 export default function FoodDetailScreen({ navigation, route }) {
   const { id } = route.params;
   const selectedFood = FOODS.find((item) => item.id === id);
 
+  const { ids, removeFavorite, addFavorite } = useContext(FavoriteContext);
+
+  const foodFavorite = ids.includes(id);
+
   const handlePress = () => {};
+
+  const changeFavorite = () => {
+    if (foodFavorite) {
+      removeFavorite(id);
+    } else {
+      addFavorite(id);
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -25,12 +38,17 @@ export default function FoodDetailScreen({ navigation, route }) {
             onPress={handlePress}
             style={({ pressed }) => pressed && styles.opacity}
           >
-            <AntDesign name="star" size={24} color="white" />
+            <Ionicons
+              name={foodFavorite ? "star" : "star-outline"}
+              size={24}
+              color="white"
+              onPress={changeFavorite}
+            />
           </Pressable>
         );
       },
     });
-  }, [navigation]);
+  }, [navigation, changeFavorite]);
   return (
     <ScrollView style={styles.routeContainer}>
       <Image style={styles.image} source={{ uri: selectedFood.imageUrl }} />

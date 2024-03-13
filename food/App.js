@@ -7,6 +7,7 @@ import FoodDetailScreen from "./screens/FoodDetailScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FavoritesScreen from "./screens/FavoritesScreen";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import FavoriteContextProvider from "./context/favoriteContext";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -45,25 +46,27 @@ function DrawerNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: "blue" },
-          headerTintColor: "white",
-          contentStyle: { backgroundColor: "lightblue" },
-        }}
-      >
-        <Stack.Screen
-          name="Drawer"
-          component={DrawerNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="FoodOverView" component={FoodOverviewScreen} />
-        <Stack.Screen
-          name="FoodDetail"
-          component={FoodDetailScreen}
-          options={{ title: "İçerik" }}
-        />
-      </Stack.Navigator>
+      <FavoriteContextProvider>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: "blue" },
+            headerTintColor: "white",
+            contentStyle: { backgroundColor: "lightblue" },
+          }}
+        >
+          <Stack.Screen
+            name="Drawer"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="FoodOverView" component={FoodOverviewScreen} />
+          <Stack.Screen
+            name="FoodDetail"
+            component={FoodDetailScreen}
+            options={{ title: "İçerik" }}
+          />
+        </Stack.Navigator>
+      </FavoriteContextProvider>
     </NavigationContainer>
   );
 }
