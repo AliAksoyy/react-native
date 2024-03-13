@@ -12,6 +12,7 @@ export default function CoursesList({ courses }) {
       data={courses}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
     />
   );
 }
