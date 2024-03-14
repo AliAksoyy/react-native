@@ -22,15 +22,15 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
   function addOrUpdateHandler() {
     if (isEditing) {
       updateCourse(courseId, {
-        description: "Güncellenen Kurs",
-        amount: 99,
-        date: new Date(),
+        amount: Number(inputs.amount),
+        date: new Date(inputs.date),
+        description: inputs.description,
       });
     } else {
       addCourse({
-        description: "Eklenen Kurs",
-        amount: 99,
-        date: new Date(),
+        amount: Number(inputs.amount),
+        date: new Date(inputs.date),
+        description: inputs.description,
       });
     }
     navigation.goBack();
