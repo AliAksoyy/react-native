@@ -13,7 +13,13 @@ export default function RecentCourses() {
     return course.date >= dateLastWeek && course.date <= today;
   });
 
-  return <Courses courses={recentCourses} coursesPeriod="Son 1 Hafta" />;
+  return (
+    <Courses
+      nullText="Yakın zamanda herhangi bir kursa kayıtlı olmadınız"
+      courses={recentCourses}
+      coursesPeriod="Son 1 Hafta"
+    />
+  );
 }
 
 const styles = StyleSheet.create({});

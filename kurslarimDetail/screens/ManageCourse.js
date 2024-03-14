@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useCoursesContext } from "../context/CourseContext";
 
 export default function ManageCourse({ navigation, route }) {
-  const { deleteCourse } = useCoursesContext();
+  const { deleteCourse, addCourse, updateCourse } = useCoursesContext();
   const courseId = route.params?.courseId;
   let isEditing = false;
 
@@ -23,6 +23,23 @@ export default function ManageCourse({ navigation, route }) {
     navigation.goBack();
   }
 
+  function addOrUpdateHandler() {
+    if (isEditing) {
+      updateCourse(courseId, {
+        description: "Güncellenen Kurs",
+        amount: 99,
+        date: new Date(),
+      });
+    } else {
+      addCourse({
+        description: "Eklenen Kurs",
+        amount: 99,
+        date: new Date(),
+      });
+    }
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.buttons}>
@@ -31,7 +48,7 @@ export default function ManageCourse({ navigation, route }) {
             <Text style={styles.cancelText}>İptal et</Text>
           </View>
         </Pressable>
-        <Pressable>
+        <Pressable onPress={addOrUpdateHandler}>
           <View style={styles.addOrDelete}>
             <Text style={styles.addOrDeleteText}>
               {isEditing ? "Güncelle" : "Ekle"}

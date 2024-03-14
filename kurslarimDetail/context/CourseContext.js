@@ -77,7 +77,7 @@ function reducer(state, action) {
         (course) => course.id === action.payload.id
       );
       const updateCourse = state[updateCourseIndex];
-      const updateItem = { ...updateCourse, ...action.payload.data };
+      const updateItem = { ...updateCourse, ...action.payload.courseData };
       const updateCourses = [...state];
       updateCourses[updateCourseIndex] = updateItem;
       return updateCourses;
