@@ -7,6 +7,7 @@ import RecentCourses from "./screens/RecentCourses";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import CoursesProvider from "./context/CourseContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -60,16 +61,18 @@ const CourseOverView = () => {
 };
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="CourseOverView"
-          component={CourseOverView}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="ManageCourse" component={ManageCourse} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CoursesProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="CourseOverView"
+            component={CourseOverView}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="ManageCourse" component={ManageCourse} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CoursesProvider>
   );
 }
 
