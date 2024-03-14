@@ -4,22 +4,27 @@ import Input from "./Input";
 
 export default function CourseForm() {
   return (
-    <View>
-      <Input
-        label="Tutar"
-        textInputConfig={{
-          keyboardType: "decimal-pad",
-          onChangeText: () => {},
-        }}
-      />
-      <Input
-        label="Tarih"
-        textInputConfig={{
-          placeholder: "YYYY-MM--DD",
-          maxLength: 10,
-          onChangeText: () => {},
-        }}
-      />
+    <View style={styles.container}>
+      <Text style={styles.title}>Kurs Bilgileri</Text>
+      <View style={styles.inputContainer}>
+        <Input
+          style={styles.flexAll}
+          label="Tutar"
+          textInputConfig={{
+            keyboardType: "decimal-pad",
+            onChangeText: () => {},
+          }}
+        />
+        <Input
+          style={styles.flexAll}
+          label="Tarih"
+          textInputConfig={{
+            placeholder: "YYYY-MM--DD",
+            maxLength: 10,
+            onChangeText: () => {},
+          }}
+        />
+      </View>
       <Input
         label="Başlık"
         textInputConfig={{
@@ -31,4 +36,18 @@ export default function CourseForm() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: { marginTop: 40 },
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  flexAll: { flex: 1 },
+  title: {
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginVertical: 20,
+    color: "blue",
+  },
+});
