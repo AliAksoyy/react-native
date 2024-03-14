@@ -5,7 +5,7 @@ import { useCoursesContext } from "../context/CourseContext";
 import CourseForm from "../components/CourseForm";
 
 export default function ManageCourse({ navigation, route }) {
-  const { deleteCourse, addCourse, updateCourse } = useCoursesContext();
+  const { deleteCourse, courses } = useCoursesContext();
   const courseId = route.params?.courseId;
   let isEditing = false;
 
@@ -24,40 +24,11 @@ export default function ManageCourse({ navigation, route }) {
     navigation.goBack();
   }
 
-  function addOrUpdateHandler() {
-    if (isEditing) {
-      updateCourse(courseId, {
-        description: "Güncellenen Kurs",
-        amount: 99,
-        date: new Date(),
-      });
-    } else {
-      addCourse({
-        description: "Eklenen Kurs",
-        amount: 99,
-        date: new Date(),
-      });
-    }
-    navigation.goBack();
-  }
+   const selectedCourse = courses.find((course) => course.id === courseId);
 
   return (
     <View style={styles.container}>
-      <CourseForm />
-      <View style={styles.buttons}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <View style={styles.cancel}>
-            <Text style={styles.cancelText}>İptal et</Text>
-          </View>
-        </Pressable>
-        <Pressable onPress={addOrUpdateHandler}>
-          <View style={styles.addOrDelete}>
-            <Text style={styles.addOrDeleteText}>
-              {isEditing ? "Güncelle" : "Ekle"}
-            </Text>
-          </View>
-        </Pressable>
-      </View>
+      <CourseForm courseId={courseId} navigation={navigation} defaultValue={selectedCourse} />
       {isEditing && (
         <View style={styles.deleteContainer}>
           <AntDesign
@@ -81,23 +52,4 @@ const styles = StyleSheet.create({
     borderTopColor: "blue",
     marginTop: 10,
   },
-  buttons: { flexDirection: "row", justifyContent: "center" },
-  cancel: {
-    backgroundColor: "red",
-    minWidth: 120,
-    marginRight: 10,
-    padding: 8,
-    alignItems: "center",
-  },
-  cancelText: {
-    color: "white",
-  },
-  addOrDelete: {
-    backgroundColor: "blue",
-    minWidth: 120,
-    marginRight: 10,
-    padding: 8,
-    alignItems: "center",
-  },
-  addOrDeleteText: { color: "white" },
 });
