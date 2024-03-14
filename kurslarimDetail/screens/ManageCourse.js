@@ -1,8 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useCoursesContext } from "../context/CourseContext";
 
 export default function ManageCourse({ navigation, route }) {
+  const { deleteCourse } = useCoursesContext();
   const courseId = route.params?.courseId;
   let isEditing = false;
 
@@ -15,6 +17,12 @@ export default function ManageCourse({ navigation, route }) {
       title: isEditing ? "Kursu Güncelle" : "Kurs Ekle",
     });
   }, [navigation, isEditing]);
+
+  function deletePress() {
+    deleteCourse(courseId);
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.buttons}>
@@ -34,7 +42,7 @@ export default function ManageCourse({ navigation, route }) {
       {isEditing && (
         <View style={styles.deleteContainer}>
           <AntDesign
-            onPress={() => navigation.goBack()}
+            onPress={deletePress}
             name="delete"
             size={36}
             color="black"

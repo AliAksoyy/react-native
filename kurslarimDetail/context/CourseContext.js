@@ -69,7 +69,9 @@ function reducer(state, action) {
       const id = new Date().toString() + Math.random().toString();
       return [{ id, ...action.payload }, ...state];
     case "DELETE":
-      return state.filter((course) => course.id !== action.payload.id);
+      return state.filter((course) => {
+        return course.id !== action.payload;
+      });
     case "UPDATE":
       const updateCourseIndex = state.findIndex(
         (course) => course.id === action.payload.id
