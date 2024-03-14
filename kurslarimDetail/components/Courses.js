@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import CoursesSummary from "./CoursesSummary";
 import CoursesList from "./CoursesList";
 
-const COURSES = [
+export const COURSES = [
   {
     id: "1",
     description: "C Programlama",
