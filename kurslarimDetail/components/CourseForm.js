@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import Input from "./Input";
 import { useCoursesContext } from "../context/CourseContext";
@@ -6,9 +6,18 @@ import { getFormattedDate } from "../helper/date";
 
 export default function CourseForm({ navigation, courseId, defaultValue }) {
   const [inputs, setInputs] = useState({
-    amount: defaultValue ? defaultValue.amount.toString() : "",
-    date: defaultValue ? getFormattedDate(defaultValue.date) : "",
-    description: defaultValue ? defaultValue.description : "",
+    amount: {
+      value: defaultValue ? defaultValue.amount.toString() : "",
+      isValid: true,
+    },
+    date: {
+      value: defaultValue ? getFormattedDate(defaultValue.date) : "",
+      isValid: true,
+    },
+    description: {
+      value: defaultValue ? defaultValue.description : "",
+      isValid: true,
+    },
   });
 
   const { addCourse, updateCourse } = useCoursesContext();
@@ -20,24 +29,48 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
   }
 
   function addOrUpdateHandler() {
+    const amountIsValid = Number(inputs.amount.value) > 0;
+    const dateIsValid = new Date(inputs.date.value) != "Invalid Date";
+    const descriptionIsValid = inputs.description.value.length > 0;
+
+    if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
+      setInputs((currentInput) => {
+        return {
+          amount: {
+            value: currentInput.amount.value,
+            isValid: amountIsValid,
+          },
+          date: { value: currentInput.date.value, isValid: dateIsValid },
+          description: {
+            value: currentInput.description.value,
+            isValid: descriptionIsValid,
+          },
+        };
+      });
+      return;
+    }
+
     if (isEditing) {
       updateCourse(courseId, {
-        amount: Number(inputs.amount),
-        date: new Date(inputs.date),
-        description: inputs.description,
+        amount: Number(inputs.amount.value),
+        date: new Date(inputs.date.value),
+        description: inputs.description.value,
       });
     } else {
       addCourse({
-        amount: Number(inputs.amount),
-        date: new Date(inputs.date),
-        description: inputs.description,
+        amount: Number(inputs.amount.value),
+        date: new Date(inputs.date.value),
+        description: inputs.description.value,
       });
     }
     navigation.goBack();
   }
 
   const handleChange = (text, item) => {
-    setInputs((current) => ({ ...current, [item]: text }));
+    setInputs((current) => ({
+      ...current,
+      [item]: { value: text, isValid: true },
+    }));
   };
 
   return (
@@ -50,7 +83,7 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: (text) => handleChange(text, "amount"),
-            value: inputs.amount,
+            value: inputs.amount.value,
           }}
         />
         <Input
@@ -60,7 +93,7 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
             placeholder: "YYYY-MM--DD",
             maxLength: 10,
             onChangeText: (text) => handleChange(text, "date"),
-            value: inputs.date,
+            value: inputs.date.value,
           }}
         />
       </View>
@@ -69,9 +102,18 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
         textInputConfig={{
           multiline: true,
           onChangeText: (text) => handleChange(text, "description"),
-          value: inputs.description,
+          value: inputs.description.value,
         }}
       />
+      {!inputs.amount.isValid && (
+        <Text>Lütfen Tutarı Doğru Formatta Giriniz</Text>
+      )}
+      {!inputs.date.isValid && (
+        <Text>Lütfen Tarihi Doğru Formatta Giriniz</Text>
+      )}
+      {!inputs.description.isValid && (
+        <Text>Lütfen Başlığı Doğru Formatta Giriniz</Text>
+      )}
       <View style={styles.buttons}>
         <Pressable onPress={() => navigation.goBack()}>
           <View style={styles.cancel}>
