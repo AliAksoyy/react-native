@@ -1,18 +1,19 @@
-import { FlatList } from "react-native";
-import React from "react";
-import CoursesItem from "./CoursesItem";
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import React from 'react';
+import CourseItem from './CourseItem';
+
+function renderCourseItem(itemData) {
+  return <CourseItem {...itemData.item} />;
+}
 
 export default function CoursesList({ courses }) {
-  function renderItem(itemData) {
-    return <CoursesItem {...itemData.item} />;
-  }
-
   return (
     <FlatList
       data={courses}
       keyExtractor={(item) => item.id}
-      renderItem={renderItem}
-      showsVerticalScrollIndicator={false}
+      renderItem={renderCourseItem}
     />
   );
 }
+
+const styles = StyleSheet.create({});

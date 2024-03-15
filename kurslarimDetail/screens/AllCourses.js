@@ -1,16 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import Courses from "../components/Courses";
-import { useCoursesContext } from "../context/CourseContext";
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Courses from '../components/Courses';
+import { useContext } from 'react';
+import { CoursesContext } from '../store/coursesContext';
 
 export default function AllCourses() {
-  const { courses } = useCoursesContext();
-
+  const coursesContext = useContext(CoursesContext);
+  console.log(coursesContext.courses);
   return (
     <Courses
-      nullText="Herhangi bir kursa kayıtlı değilsiniz"
-      courses={courses}
+      courses={coursesContext.courses}
       coursesPeriod="Hepsi"
+      nullText="Herhangi bir kursa kayıtlı değilsiniz"
     />
   );
 }

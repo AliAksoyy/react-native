@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "kurslarimDetail",
-    "slug": "kurslarimDetail",
+    "name": "kurs",
+    "slug": "kurs",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

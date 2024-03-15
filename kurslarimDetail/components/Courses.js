@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text } from "react-native";
-import React from "react";
-import CoursesSummary from "./CoursesSummary";
-import CoursesList from "./CoursesList";
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import CoursesSummary from './CoursesSummary';
+import CoursesList from './CoursesList';
 
-export default function Courses({ courses, coursesPeriod, nullText }) {
+export default function Courses({ coursesPeriod, courses, nullText }) {
   let content = <Text style={styles.alert}>{nullText}</Text>;
 
   if (courses.length > 0) {
@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
   },
   alert: {
     fontSize: 16,
-
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 30,
   },
 });

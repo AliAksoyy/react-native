@@ -1,41 +1,49 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import React from 'react';
 
-export default function Input({ label, textInputConfig, style, inValid }) {
+export default function Input({ label, textInputConfig, style, invalid }) {
   const inputStyles = [styles.input];
+
   if (textInputConfig && textInputConfig.multiline) {
-    inputStyles.push(styles.multiline);
+    inputStyles.push(styles.inputMultiline);
+  }
+  if (invalid) {
+    inputStyles.push(styles.invalidInput);
   }
   return (
-    <View style={[styles.container, style]}>
-      <Text style={[styles.label, inValid && styles.errorLabel]}>{label}</Text>
-      <TextInput
-        style={[...inputStyles, inValid && styles.error]}
-        {...textInputConfig}
-      />
+    <View style={[styles.inputContainer, style]}>
+      <Text style={[styles.label, invalid && styles.invalidLabel]}>
+        {label}
+      </Text>
+      <TextInput style={inputStyles} {...textInputConfig} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { marginVertical: 10, marginHorizontal: 4 },
-  label: { fontSize: 16, color: "blue", marginBottom: 4 },
-  input: {
-    backgroundColor: "pink",
-    padding: 6,
-    borderRadius: 10,
-    fontSize: 18,
+  inputContainer: {
+    marginHorizontal: 4,
+    marginVertical: 10,
   },
-  multiline: { minHeight: 100, textAlignVertical: "top" },
-  error: {
-    backgroundColor: "red",
-    padding: 6,
-    borderRadius: 10,
-    fontSize: 18,
-  },
-  errorLabel: {
-    color: "red",
-    fontSize: 16,
+  label: {
+    fontSize: 15,
+    color: 'blue',
     marginBottom: 4,
+  },
+  input: {
+    backgroundColor: 'pink',
+    padding: 6,
+    borderRadius: 10,
+    fontSize: 18,
+  },
+  inputMultiline: {
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+  invalidLabel: {
+    color: 'red',
+  },
+  invalidInput: {
+    backgroundColor: 'red',
   },
 });

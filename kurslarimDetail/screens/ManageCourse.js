@@ -1,13 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useLayoutEffect } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import { useCoursesContext } from "../context/CourseContext";
-import CourseForm from "../components/CourseForm";
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { useLayoutEffect } from 'react';
+import { EvilIcons } from '@expo/vector-icons';
+import { useContext } from 'react';
+import { CoursesContext } from '../store/coursesContext';
+import CourseForm from '../components/CourseForm';
+import { storeCourse, updateCourse, deleteCourseHttp } from '../helper/http';
+import LoadingSpinner from '../components/LoadingSpinner';
+import ErrorText from '../components/ErrorText';
 
-export default function ManageCourse({ navigation, route }) {
-  const { deleteCourse, courses } = useCoursesContext();
+export default function ManageCourse({ route, navigation }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState();
+  const coursesContext = useContext(CoursesContext);
   const courseId = route.params?.courseId;
   let isEditing = false;
+
+  const selectedCourse = coursesContext.courses.find(
+    (course) => course.id === courseId
+  );
 
   if (courseId) {
     isEditing = true;
@@ -15,27 +26,68 @@ export default function ManageCourse({ navigation, route }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: isEditing ? "Kursu Güncelle" : "Kurs Ekle",
+      title: isEditing ? 'Kursu Güncelle' : 'Kurs Ekle',
     });
   }, [navigation, isEditing]);
 
-  function deletePress() {
-    deleteCourse(courseId);
+  async function deleteCourse() {
+    setIsSubmitting(true);
+    setError(null);
+    try {
+      coursesContext.deleteCourse(courseId);
+      await deleteCourseHttp(courseId);
+      navigation.goBack();
+    } catch (error) {
+      setError('Kursları silemedik!');
+      setIsSubmitting(false);
+    }
+  }
+  if (error && !isSubmitting) {
+    return <ErrorText message={error} />;
+  }
+
+  function cancelHandler() {
     navigation.goBack();
   }
 
-   const selectedCourse = courses.find((course) => course.id === courseId);
+  async function addOrUpdateHandler(courseData) {
+    setIsSubmitting(true);
+    setError(null);
+    try {
+      if (isEditing) {
+        coursesContext.updateCourse(courseId, courseData);
+        await updateCourse(courseId, courseData);
+      } else {
+        const id = await storeCourse(courseData);
+        coursesContext.addCourse({ ...courseData, id: id });
+      }
+      navigation.goBack();
+    } catch (error) {
+      setError('Kurs eklemede veya güncellemede problem var!');
+      setIsSubmitting(false);
+    }
+  }
+
+  if (isSubmitting) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <View style={styles.container}>
-      <CourseForm courseId={courseId} navigation={navigation} defaultValue={selectedCourse} />
+      <CourseForm
+        buttonLabel={isEditing ? 'Güncelle' : 'Ekle'}
+        onSubmit={addOrUpdateHandler}
+        cancelHandler={cancelHandler}
+        defaultValues={selectedCourse}
+      />
+
       {isEditing && (
         <View style={styles.deleteContainer}>
-          <AntDesign
-            onPress={deletePress}
-            name="delete"
+          <EvilIcons
+            name="trash"
             size={36}
             color="black"
+            onPress={deleteCourse}
           />
         </View>
       )}
@@ -44,12 +96,15 @@ export default function ManageCourse({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 25 },
+  container: {
+    flex: 1,
+    padding: 25,
+  },
   deleteContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     borderTopWidth: 2,
+    borderTopColor: 'blue',
     paddingTop: 10,
-    borderTopColor: "blue",
-    marginTop: 10,
+    marginTop: 16,
   },
 });
