@@ -1,15 +1,18 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import React from "react";
 
-export default function Input({ label, textInputConfig, style }) {
+export default function Input({ label, textInputConfig, style, inValid }) {
   const inputStyles = [styles.input];
   if (textInputConfig && textInputConfig.multiline) {
     inputStyles.push(styles.multiline);
   }
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={inputStyles} {...textInputConfig} />
+      <Text style={[styles.label, inValid && styles.errorLabel]}>{label}</Text>
+      <TextInput
+        style={[...inputStyles, inValid && styles.error]}
+        {...textInputConfig}
+      />
     </View>
   );
 }
@@ -24,4 +27,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   multiline: { minHeight: 100, textAlignVertical: "top" },
+  error: {
+    backgroundColor: "red",
+    padding: 6,
+    borderRadius: 10,
+    fontSize: 18,
+  },
+  errorLabel: {
+    color: "red",
+    fontSize: 16,
+    marginBottom: 4,
+  },
 });

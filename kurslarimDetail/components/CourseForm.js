@@ -85,6 +85,7 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
             onChangeText: (text) => handleChange(text, "amount"),
             value: inputs.amount.value,
           }}
+          inValid={!inputs.amount.isValid}
         />
         <Input
           style={styles.flexAll}
@@ -95,6 +96,7 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
             onChangeText: (text) => handleChange(text, "date"),
             value: inputs.date.value,
           }}
+          inValid={!inputs.date.isValid}
         />
       </View>
       <Input
@@ -104,16 +106,20 @@ export default function CourseForm({ navigation, courseId, defaultValue }) {
           onChangeText: (text) => handleChange(text, "description"),
           value: inputs.description.value,
         }}
+        inValid={!inputs.description.isValid}
       />
-      {!inputs.amount.isValid && (
-        <Text>Lütfen Tutarı Doğru Formatta Giriniz</Text>
-      )}
-      {!inputs.date.isValid && (
-        <Text>Lütfen Tarihi Doğru Formatta Giriniz</Text>
-      )}
-      {!inputs.description.isValid && (
-        <Text>Lütfen Başlığı Doğru Formatta Giriniz</Text>
-      )}
+      <View style={styles.error}>
+        {!inputs.amount.isValid && (
+          <Text>Lütfen Tutarı Doğru Formatta Giriniz</Text>
+        )}
+        {!inputs.date.isValid && (
+          <Text>Lütfen Tarihi Doğru Formatta Giriniz</Text>
+        )}
+        {!inputs.description.isValid && (
+          <Text>Lütfen Başlığı Doğru Formatta Giriniz</Text>
+        )}
+      </View>
+
       <View style={styles.buttons}>
         <Pressable onPress={() => navigation.goBack()}>
           <View style={styles.cancel}>
@@ -165,4 +171,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addOrDeleteText: { color: "white" },
+  error: {
+    alignItems: "center",
+    marginBottom: 10,
+  },
 });
